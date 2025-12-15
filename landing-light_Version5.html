@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Made — Marketplace régionale</title>
+  <meta name="description" content="Made — marketplace régionale pour artisans, PME et producteurs. En cours de développement pour Made.Paris, Made.Alsace et Made.Bzh." />
+  <style>
+    /* Léger et épuré */
+    :root{--bg:#fff;--text:#0b1320;--muted:#6b7680;--accent:#ffb800;--card:#f7f9fb;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-size:16px;line-height:1.45}
+    .wrap{max-width:980px;margin:28px auto;padding:20px}
+    header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+    .brand{min-width:220px}
+    .logo{font-weight:700;color:var(--accent)}
+    h1{margin:8px 0 4px;font-size:20px}
+    p.lead{margin:0 0 12px;color:var(--muted)}
+    .region-selector{background:var(--card);padding:10px;border-radius:10px;border:1px solid rgba(11,19,32,0.04);display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+    .region-selector strong{font-size:13px}
+    .regions{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:transparent;border:1px solid rgba(11,19,32,0.06);font-size:13px;color:var(--text);cursor:pointer}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:18px}
+    .card{background:var(--card);padding:14px;border-radius:10px;border:1px solid rgba(11,19,32,0.04)}
+    .small{color:var(--muted);font-size:14px}
+    .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--accent);color:#081018;text-decoration:none;font-weight:600}
+    .status{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    .badge{padding:6px 8px;border-radius:999px;font-size:13px}
+    .live{background:#e9f7ef;color:#0a6b3a}
+    .soon{background:#fff7e6;color:#7a4a00}
+    footer{margin-top:20px;color:var(--muted);font-size:13px}
+    iframe.tally-embed{width:100%;border:0}
+    @media (max-width:820px){.grid{grid-template-columns:1fr}.region-selector{width:100%;align-items:flex-start}}
+    .region-desc p{margin:0 0 10px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">Made</div>
+        <h1 id="site-title">Marketplace régionale — En cours de développement</h1>
+        <div class="small">Souverain • Local • Éthique</div>
+      </div>
+
+      <div class="region-selector" aria-label="Choisir une région">
+        <strong>Choisissez une région</strong>
+        <div class="regions" role="tablist" aria-label="Régions">
+          <button class="pill" onclick="setRegion('paris')" role="tab" id="tab-paris">Made.Paris</button>
+          <button class="pill" onclick="setRegion('alsace')" role="tab" id="tab-alsace">Made.Alsace</button>
+          <button class="pill" onclick="setRegion('bzh')" role="tab" id="tab-bzh">Made.Bzh</button>
+        </div>
+      </div>
+    </header>
+
+    <p class="lead">Une plateforme légère et souveraine pour reconnecter production et consommation locale. Disponible bientôt pour Made.Paris, Made.Alsace et Made.Bzh — en cours de développement.</p>
+
+    <div class="grid">
+      <main>
+        <div id="region-card" class="card" role="region" aria-live="polite">
+          <h2 id="region-name">Chargement…</h2>
+          <div id="region-desc" class="small region-desc">Nous préparons le contenu spécifique à votre territoire.</div>
+
+          <div style="margin-top:12px">
+            <strong>Ce que nous proposons</strong>
+            <ul class="small" style="margin:8px 0 0;padding-left:18px">
+              <li>Place de marché locale (plusieurs catégories de produits et services).</li>
+              <li>Outils de gestion simplifiés (inventaire, facturation, logistique).</li>
+              <li>Traçabilité et preuve d'impact (QR / données produit).</li>
+              <li>Référencement pour achats publics et sourcing local.</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:12px" class="small">
+            Note commerciale : nos commissions sont inférieures à 10% sur la plateforme, alors que les acteurs qui proposent uniquement une vitrine facturent en moyenne ~15%. Nous proposons plusieurs types de produits et services au sein de notre marketplace.
+          </div>
+
+          <div style="margin-top:14px">
+            <a id="cta-sell" class="btn" href="mailto:we@made.paris">Contactez‑nous</a>
+          </div>
+        </div>
+
+        <section id="why" style="margin-top:14px">
+          <div class="card">
+            <strong>Pourquoi</strong>
+            <p class="small" style="margin-top:8px">Parce que la valeur doit rester là où elle est créée. Nous remettons les producteurs locaux au centre, avec des outils adaptés et une visibilité honnête.</p>
+          </div>
+        </section>
+      </main>
+
+      <aside>
+        <div class="card">
+          <strong>Statut régional</strong>
+
+          <div class="status" style="margin-top:12px">
+            <div id="badge-paris" class="badge soon">Made.Paris — en cours de développement</div>
+            <div id="badge-alsace" class="badge soon">Made.Alsace — en cours de développement</div>
+            <div id="badge-bzh" class="badge soon">Made.Bzh — en cours de développement</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <strong>Bientôt</strong>
+            <p class="small" style="margin:8px 0 0">Inscrivez votre email pour être prévenu·e du lancement et des sessions d'accompagnement.</p>
+
+            <!-- Tally embed : formulaire hébergé par Tally -->
+            <div style="margin-top:10px">
+              <iframe class="tally-embed" src="https://tally.so/embed/ob6ByN?alignLeft=1&transparentBackground=1&dynamicHeight=1" title="Inscription lancement Made" width="100%" height="320"></iframe>
+            </div>
+
+            <div class="small" style="margin-top:8px">Contact : we@made.paris</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <strong>Ressources</strong>
+          <ul class="small" style="margin:8px 0 0;padding-left:18px">
+            <li>ImpactData & traçabilité</li>
+            <li>Accès aux marchés publics</li>
+            <li>Tutoriels et onboarding</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="small">© Made — En cours de développement — produit de CircularOS.eu</div>
+    </footer>
+  </div>
+
+  <script>
+    // Descriptions en français — affichées quand on clique sur une région
+    const REGIONS = {
+      paris: {
+        title: "Made.Paris — La marketplace du circuit court et de la capitale de l'innovation",
+        html: `
+          <p><strong>La marketplace du circuit court et de la capitale de l'innovation</strong></p>
+          <p>Made.Paris est l'outil de résistance et de croissance pour les producteurs d'Île‑de‑France. Face à la prédation des géants du e‑commerce qui captent les marges, cette place de marché propose une alternative souveraine, locale et éthique. Elle permet aux artisans du Faubourg Saint‑Antoine, aux créateurs de mode du Sentier et aux startups de Station F de vendre directement aux Parisiens (B2C) et aux entreprises locales (B2B) sans commissions abusives.</p>
+          <p>Au‑delà de la vente, Made.Paris fournit un « Circular SaaS » complet : un tableau de bord de gestion simplifié qui aide les très petites entreprises à gérer leurs stocks, facturation et logistique urbaine décarbonée. La plateforme inclut des tutoriels pour aider les artisans à se digitaliser et à promouvoir leurs labels (Made in Paris). En rapprochant le lieu de fabrication du lieu de consommation, Made.Paris réduit drastiquement l'empreinte carbone et restitue le pouvoir d'achat aux producteurs, recréant une économie locale dense et solidaire au cœur de la métropole.</p>
+        `
+      },
+      alsace: {
+        title: "Made.Alsace — L'alliance de la tradition et de l'industrie",
+        html: `
+          <p><strong>L'alliance de la tradition et de l'industrie</strong></p>
+          <p>Made.Alsace est la plateforme dédiée à l'une des régions les plus industrielles et identitaires d'Europe. Elle met en relation la puissance des PME industrielles alsaciennes avec la richesse de son artisanat traditionnel. L'objectif est de structurer une offre locale solide, capable de répondre aux besoins transfrontaliers tout en promouvant l'économie circulaire sur le territoire rhénan.</p>
+          <p>La plateforme met l'accent sur la valorisation des filières d'excellence (mécanique, agroalimentaire, bois) auprès des consommateurs et des acheteurs professionnels. Elle propose des outils spécifiques pour la gestion des certifications locales et transfrontalières. Made.Alsace permet aux producteurs de mutualiser leur logistique et de gagner en visibilité face aux concurrents internationaux. C'est un outil de fierté régionale qui transforme le « Made in Alsace » en gage de qualité technique et environnementale, garantissant que la valeur ajoutée reste dans la région pour financer la formation et l'emploi local.</p>
+        `
+      },
+      bzh: {
+        title: "Made.Bzh — Le phare de l'économie maritime et agricole",
+        html: `
+          <p><strong>Le phare de l'économie maritime et agricole</strong></p>
+          <p>Made.Bzh est le portail de la souveraineté bretonne. Il rassemble les acteurs de la terre (agriculteurs, éleveurs) et de la mer (pêcheurs, tisserands marins, chantiers navals) sur une place de marché commune. La plateforme vise à désintermédier les filières alimentaires et industrielles afin d'assurer une rémunération équitable pour les producteurs qui nourrissent et équipent le pays.</p>
+          <p>Spécifiquement adaptée au territoire, Made.Bzh intègre des fonctions avancées de traçabilité pour les produits de la mer et l'agriculture bio, répondant à une forte demande de transparence. Elle sert aussi de vitrine à l'innovation maritime (courses, énergies marines). En proposant des tutoriels sur la transition écologique et des outils de vente directe, Made.Bzh renforce le tissu économique local souvent éloigné des centres décisionnels. Elle permet à la Bretagne d'exporter son identité forte et ses produits d'exception tout en gardant la maîtrise de ses circuits de distribution.</p>
+        `
+      }
+    };
+
+    function detectRegion(){
+      const h = location.hostname.toLowerCase();
+      if (h.includes("made.alsace")) return "alsace";
+      if (h.includes("made.bzh")) return "bzh";
+      if (h.includes("made.paris")) return "paris";
+      const p = new URLSearchParams(location.search).get('r');
+      if (p && REGIONS[p]) return p;
+      return "paris";
+    }
+
+    function setRegion(slug){
+      const r = REGIONS[slug] || REGIONS.paris;
+      document.getElementById('region-name').textContent = r.title;
+      document.getElementById('region-desc').innerHTML = r.html;
+      document.getElementById('site-title').textContent = r.title + " — En cours de développement";
+      // CTA fixe vers we@made.paris
+      document.getElementById('cta-sell').href = "mailto:we@made.paris?subject=Contact%20" + encodeURIComponent(slug);
+      // mise à jour des badges
+      document.getElementById('badge-paris').className = 'badge ' + (slug==='paris' ? 'live' : 'soon');
+      document.getElementById('badge-alsace').className = 'badge ' + (slug==='alsace' ? 'live' : 'soon');
+      document.getElementById('badge-bzh').className = 'badge ' + (slug==='bzh' ? 'live' : 'soon');
+      // attribut ARIA pour l'accessibilité
+      document.getElementById('tab-paris').setAttribute('aria-selected', slug === 'paris');
+      document.getElementById('tab-alsace').setAttribute('aria-selected', slug === 'alsace');
+      document.getElementById('tab-bzh').setAttribute('aria-selected', slug === 'bzh');
+    }
+
+    // initialisation
+    (function(){
+      setRegion(detectRegion());
+    })();
+  </script>
+</body>
+</html>
